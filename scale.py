@@ -1,6 +1,7 @@
 """
 Escalas definidas para la adimensionalizacion del modelo.
 """
+
 distance = 10  # Km
 time = 15  # min
 temperature = 3  # K
