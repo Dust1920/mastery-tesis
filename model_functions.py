@@ -13,3 +13,14 @@ def approxfqv(z, c):
         return fqv
     else:
         return "ERROR"
+    
+def vt(qr,par):
+    vt0 = par[0]
+    q_star = par[1]
+    y = vt0 * qr / q_star
+    return y
+    
+
+
+def vtn(qr,vtnd):
+    
