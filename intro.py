@@ -15,4 +15,4 @@ t = t_final / scale.time
 h_region = np.linspace(0,z_final,n_h)
 
 # To System Model
-initial = np.array([variables, z_final, h_region, t_final])
+initial = [variables, z_final, t_final,h_region]
