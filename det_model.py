@@ -28,6 +28,14 @@ workspace[:, 4] = intro.initial_qn(intro.h_region)
 
 vf.visual_system(workspace, intro.h_region)
 
-s = sol.solver(delta_t,delta_z,workspace,vp.bfp,vp.atvp,vp.cep,intro.h_region)
-print(s)
 
+s = sol.solver(dt = delta_t,
+               dz = delta_z,
+               u = workspace,
+               par1 = vp.bfp,
+               par2 = vp.atvp,
+               par3 = vp.cep,
+               height= intro.h_region,
+               tf= 1 / 15,
+               cfl= cfl)
+               
