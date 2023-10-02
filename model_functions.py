@@ -25,11 +25,10 @@ def theta_hat(z,par):
 def bouyancy_force(par, theta, qv, qr, z):
     #  bvp = np.array([temperature_ref, temperature_rate, g, epsilon, qv0, lcp, desaceleration])
     theta_0 = par[0]
-    b = par[1]
     g = par[2]
     eps = par[3]
     qv0 = par[4]
-    theta_env = theta_0 + b * z
+    theta_env = theta_hat(z,par)
     qv_hat = approxfqv(z, qv0)
     f = g / theta_0 * (theta - theta_env + eps * theta_0 * (qv - qv_hat) - theta_0 * qr)
     return f
@@ -47,7 +46,7 @@ def vtn(qr,par):
     q_star = par[1]
     vtnd = par[2]
     y = vtnd + np.max([qr / q_star, 1]) * np.max([vt(qr,par)-vtnd],0)
-
+    return y
 
 def w_vt(w,qr,par):
     y = w - vt(qr, par)
