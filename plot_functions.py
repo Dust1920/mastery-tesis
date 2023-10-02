@@ -21,3 +21,4 @@ def visual_system(u, space):
     wq[1,0].plot(qr * scale.ratio, space * scale.height)
     wq[1,1].plot(qn * scale.ratio, space * scale.height)
     plt.show()
+    

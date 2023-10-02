@@ -18,3 +18,12 @@ n_z = intro.n_h
 
 workspace = np.zeros((n_z,n_var))
 
+workspace[:, 0] = intro.initial_velocity(intro.h_region)
+workspace[:, 1] = intro.initial_temperature(intro.h_region)
+workspace[:, 2] = intro.initial_qv(intro.h_region)
+workspace[:, 3] = intro.initial_qr(intro.h_region)
+workspace[:, 4] = intro.initial_qn(intro.h_region)
+
+vf.visual_system(workspace, intro.h_region)
+
+
