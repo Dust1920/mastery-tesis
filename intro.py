@@ -5,7 +5,7 @@ import numpy as np
 variables = ['v','theta','qv','qr','qn']  # PDSEs Variables
 z_final = 15   # final height (tropopause) (assume h_initial = 0).
 n_h = 64       # grid points on height.
-t_final = 1    # final time (assume t_initial = 0).
+t_final = 60   # final time (assume t_initial = 0).
 
 # Adimensionalization
 z_final = z_final / scale.height
@@ -42,6 +42,7 @@ def heaviside(z,a):
 
 def initial_velocity(z_vector):
     y = [heaviside(i,a_omega) for i in z_vector]
+    # y = [-1/scale.velocity for i in z_vector]
     return y
     
     

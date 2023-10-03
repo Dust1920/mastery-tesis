@@ -8,12 +8,9 @@ def approxfqv(z, c):
     c0 = 0.1
     d = 3.48
     bl = 1 - b * np.log(1 + c0 * z)
-    if bl > 0:
-        pz = bl ** d
-        fqv = (c / pz) * np.exp(- a * (1 / ((1 - b * np.log(1 + c0 * z)) * (1 + c0 * z)) - 1))
-        return fqv
-    else:
-        return "ERROR"
+    pz = bl ** d
+    fqv = (c / pz) * np.exp(- a * (1 / ((1 - b * np.log(1 + c0 * z)) * (1 + c0 * z)) - 1))
+    return fqv
 
 def theta_hat(z,par):
     theta_0 = par[0]
@@ -31,6 +28,7 @@ def bouyancy_force(par, theta, qv, qr, z):
     theta_env = theta_hat(z,par)
     qv_hat = approxfqv(z, qv0)
     f = g / theta_0 * (theta - theta_env + eps * theta_0 * (qv - qv_hat) - theta_0 * qr)
+    f = 0
     return f
 
 
@@ -39,6 +37,7 @@ def vt(qr,par):
     vt0 = par[0]
     q_star = par[1]
     y = vt0 * qr / q_star
+    y = 0
     return y
     
 
@@ -46,6 +45,7 @@ def vtn(qr,par):
     q_star = par[1]
     vtnd = par[2]
     y = vtnd + np.max([qr / q_star, 1]) * np.max([vt(qr,par)-vtnd],0)
+    y = 0
     return y
 
 def w_vt(w,qr,par):
