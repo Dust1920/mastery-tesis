@@ -1,5 +1,6 @@
 import numpy as np
 
+
 # Bouyancy functions
 def approxfqv(z, c):
     # Dr.Gerardo Hernandez Dueñas
@@ -12,7 +13,8 @@ def approxfqv(z, c):
     fqv = (c / pz) * np.exp(- a * (1 / ((1 - b * np.log(1 + c0 * z)) * (1 + c0 * z)) - 1))
     return fqv
 
-def theta_hat(z,par):
+
+def theta_hat(z, par):
     theta_0 = par[0]
     tem_rate = par[1]
     b = theta_0 + tem_rate * z
@@ -25,7 +27,7 @@ def bouyancy_force(par, theta, qv, qr, z):
     g = par[2]
     eps = par[3]
     qv0 = par[4]
-    theta_env = theta_hat(z,par)
+    theta_env = theta_hat(z, par)
     qv_hat = approxfqv(z, qv0)
     f = g / theta_0 * (theta - theta_env + eps * theta_0 * (qv - qv_hat) - theta_0 * qr)
     f = 0
@@ -33,7 +35,7 @@ def bouyancy_force(par, theta, qv, qr, z):
 
 
 # aerosol and terminal velocity functions 
-def vt(qr,par):
+def vt(qr, par):
     vt0 = par[0]
     q_star = par[1]
     y = vt0 * qr / q_star
@@ -41,14 +43,15 @@ def vt(qr,par):
     return y
     
 
-def vtn(qr,par):
+def vtn(qr, par):
     q_star = par[1]
     vtnd = par[2]
-    y = vtnd + np.max([qr / q_star, 1]) * np.max([vt(qr,par)-vtnd],0)
+    y = vtnd + np.max([qr / q_star, 1]) * np.max([vt(qr, par)-vtnd], 0)
     y = 0
     return y
 
-def w_vt(w,qr,par):
+
+def w_vt(w, qr, par):
     y = w - vt(qr, par)
     return y
 
@@ -59,28 +62,29 @@ def w_vtn(w, qr, par):
 
 
 # Condensation and Evaporation functions
-def tau_c(q_n,par,qn_0):
+def tau_c(q_n, par, qn_0):
     tau_0 = par[0]
     gamma = par[1]
-    tau_c = tau_0 * np.exp(-((q_n - qn_0)/ gamma) ** 2)
+    tau_c = tau_0 * np.exp(-((q_n - qn_0) / gamma) ** 2)
     return tau_c
 
 
-def condensation(qv,qn,z,qn_0, par):
+def condensation(qv, qn, z, qn_0, par):
     qvs0 = par[2]
     dif = qv - approxfqv(z, qvs0)
     cd = tau_c(qn, par, qn_0) ** (-1) * np.max([dif, 0])
     return cd 
 
 
-def evaporation(qv,qr,z,par):
+def evaporation(qv, qr, z, par):
     qvs0 = par[2]
     tau_e = par[3]
     q_star = par[4]
-    dif = approxfqv(z,qvs0) - qv
+    dif = approxfqv(z, qvs0) - qv
     ev = qr * (tau_e * q_star)**(-1) * np.max([dif, 0])
     return ev
 
-def co_ev(qv,qr,qn,z,qn_0,par):
-    y = condensation(qv,qn,z,qn_0,par) - evaporation(qv,qr,z,par)
+
+def co_ev(qv, qr, qn, z, qn_0, par):
+    y = condensation(qv, qn, z, qn_0, par) - evaporation(qv, qr, z, par)
     return y

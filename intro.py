@@ -2,7 +2,7 @@ import scale
 import numpy as np
 
  
-variables = ['v','theta','qv','qr','qn']  # PDSEs Variables
+variables = ['v', 'theta', 'qv', 'qr', 'qn']  # PDSEs Variables
 z_final = 15   # final height (tropopause) (assume h_initial = 0).
 n_h = 64       # grid points on height.
 t_final = 60   # final time (assume t_initial = 0).
@@ -12,10 +12,10 @@ z_final = z_final / scale.height
 t_final = t_final / scale.time
 
 # Discretization
-h_region = np.linspace(0,z_final,n_h)
+h_region = np.linspace(0, z_final, n_h)
 
 # To System Model
-initial = [variables, z_final, t_final,h_region]
+initial = [variables, z_final, t_final, h_region]
 
 # Initial functions
 a_omega = 8
@@ -30,8 +30,9 @@ a_qv = a_qv / scale.height
 a_qr = a_qr / scale.height
 a_qn = a_qn / scale.height
 
+
 # Heaviside function
-def heaviside(z,a):
+def heaviside(z, a):
     if z < a:
         y = 0
     else:
@@ -39,25 +40,27 @@ def heaviside(z,a):
     return y
 
 
-
 def initial_velocity(z_vector):
-    y = [heaviside(i,a_omega) for i in z_vector]
+    y = [heaviside(i, a_omega) for i in z_vector]
     # y = [-1/scale.velocity for i in z_vector]
     return y
     
     
 def initial_temperature(z_vector):
-    y = [heaviside(i,a_temp) for i in z_vector]
+    y = [heaviside(i, a_temp) for i in z_vector]
     return y
-    
+
+
 def initial_qv(z_vector):
-    y = [heaviside(i,a_qv) for i in z_vector]
+    y = [heaviside(i, a_qv) for i in z_vector]
     return y
-    
+
+
 def initial_qr(z_vector):
-    y = [heaviside(i,a_qr) for i in z_vector]
+    y = [heaviside(i, a_qr) for i in z_vector]
     return y
-    
+
+
 def initial_qn(z_vector):
-    y = [heaviside(i,a_qn) for i in z_vector]
+    y = [heaviside(i, a_qn) for i in z_vector]
     return y

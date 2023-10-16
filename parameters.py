@@ -36,9 +36,7 @@ vtnd = 1
 vt0 = vt0 / scale.velocity
 q_star = q_star / scale.ratio
 vtnd = vtnd / scale.velocity
-
 atvp = np.array([vt0, q_star, vtnd])
-
 
 
 # condensation and evaporation parameters
