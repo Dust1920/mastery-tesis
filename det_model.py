@@ -34,4 +34,3 @@ vf.visual_system(workspace, intro.h_region)
 s = sol.solver(delta_t, delta_z, workspace, vp.bfp, vp.atvp, vp.cep, intro.h_region, t_final, cfl)
 
 vf.visual_system(s, intro.h_region)
-a
