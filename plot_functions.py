@@ -11,8 +11,8 @@ def visual_system(u, space):
     qv = u[:, 2]
     qr = u[:, 3]
     qn = u[:, 4]
-    fig_wt, wt = plt.subplots(1, 2, sharey='True')
-    fig_wq, wq = plt.subplots(2, 2, sharey='True')
+    fig_wt, wt = plt.subplots(1, 2, sharey=True)
+    fig_wq, wq = plt.subplots(2, 2, sharey=True)
 
     wt[0].plot(w * scale.velocity, space * scale.height)
     wt[1].plot(t * scale.temperature, space * scale.height)

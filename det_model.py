@@ -3,7 +3,6 @@ import solver_functions as sol
 import numpy as np
 import plot_functions as vf
 import parameters as vp
-import model_functions as mf
 
 """
 Resolución del modelo Determinista FARE.
@@ -13,7 +12,7 @@ delta_z = intro.h_region[1] - intro.h_region[0]
 t_final = intro.initial[2]
 
 
-cfl = 0.5
+cfl = 0.45
 a0 = 1
 delta_t = sol.delta_t(cfl, delta_z, a0)
 
@@ -35,3 +34,4 @@ vf.visual_system(workspace, intro.h_region)
 s = sol.solver(delta_t, delta_z, workspace, vp.bfp, vp.atvp, vp.cep, intro.h_region, t_final, cfl)
 
 vf.visual_system(s, intro.h_region)
+a
